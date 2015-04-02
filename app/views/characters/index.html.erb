@@ -1,0 +1,24 @@
+<h1>A Song of Ice and Fire Characters</h1>
+
+<div ng-app="app">
+  <div ng-controller="charactersCtrl" ng-init="fetchData()">
+
+    <div id="form">
+      <div id="errors">
+        <p ng-repeat="error in errors"> {{ error }} </p>
+      </div>
+      First Name: <input ng-model="newCharacterFirstName">
+      Last Name: <input ng-model="newCharacterLastName">
+      Bio: <input ng-model="newCharacterBio">
+      <button ng-click="addCharacter(newCharacterFirstName, newCharacterLastName, newCharacterBio)">Add Character</button>
+    </div>
+
+    <hr> 
+
+    <div ng-repeat="character in characters">
+      <h3 ng-click="show=!show"> {{ character.first_name }} {{ character.last_name }} </h3>
+        <p ng-hide="!show"> {{ character.bio }}</p>  
+    </div> 
+
+  </div>
+</div>
