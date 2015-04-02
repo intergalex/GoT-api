@@ -2,7 +2,21 @@
 
 <div ng-app="app">
   <div ng-controller="charactersCtrl" ng-init="fetchData()">
+    
+    <hr> 
 
+    <label> Filter by name </label>
+    <input ng-model="firstNameFilter"> 
+
+    <button ng-click="changeOrder('first_name')"> Order by first name </button> 
+    <button ng-click="changeOrder('bio')"> Order by details </button> 
+    <div ng-repeat="character in characters | filter: {first_name: firstNameFilter} | orderBy:orderByAttribute:descending">
+      <h3 ng-click="show=!show"> {{ character.first_name }} {{ character.last_name }} </h3>
+        <p ng-hide="!show"> {{ character.bio }}</p>  
+    </div> 
+
+    <hr> 
+    <h2> Add Character </h2> 
     <div id="form">
       <div id="errors">
         <p ng-repeat="error in errors"> {{ error }} </p>
@@ -12,13 +26,5 @@
       Bio: <input ng-model="newCharacterBio">
       <button ng-click="addCharacter(newCharacterFirstName, newCharacterLastName, newCharacterBio)">Add Character</button>
     </div>
-
-    <hr> 
-
-    <div ng-repeat="character in characters">
-      <h3 ng-click="show=!show"> {{ character.first_name }} {{ character.last_name }} </h3>
-        <p ng-hide="!show"> {{ character.bio }}</p>  
-    </div> 
-
   </div>
 </div>
